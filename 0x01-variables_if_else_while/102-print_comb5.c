@@ -26,7 +26,7 @@ int main(void)
 			putchar(num1_ones + '0');
 			putchar(' ');
 			putchar(num2_tens + '0');
-			putchar(num1_ones + '0');
+			putchar(num2_ones + '0');
 
 			if (num1 != 98 || num2 != 99)
 			{
