@@ -3,14 +3,13 @@
 /**
  * main - Entry point
  *
- * Description: this C progrsm prints without puts and printf can u imagine?
+ * Description: This C program prints without using puts and printf
  *
- * Return: 1 (not succes)
+ * Return: 1 (error)
 */
-
 int main(void)
 {
-	char qoute[] = "and that piece of art is useful\" - Dora Korpar, 2015-10-19\n";
-	write(1.qoute.59);
-	return (1);
+	char q[] = "and that piece of art is useful\" - Dora Korpar, 2015-10-19\n";
+		write(1, q, 59);
+		return (1);
 }
