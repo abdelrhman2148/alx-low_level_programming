@@ -8,17 +8,34 @@
 
 void print_times_table(int n)
 {
-	if (n < 0 || n > 15)
+	int pro, mul, num;
+
+	if (n <= 15 && n >= 0)
 	{
-		return (0);
-	}
-	for (int num = 0; num <= n; num++)
-	{
-		for (int multi = 0; multi <= n; multi++)
+		for (num = 0; num <= n; num++)
 		{
-			printf("%4d, ", num * multi);
+			_putchar(48);
+			for (mul = 1; mul <= n; mul++)
+			{
+				_putchar(',');
+				_putchar(' ');
+
+				pro = num * mul;
+				if (pro <= 9)
+					_putchar(' ');
+				if (pro <= 99)
+					_putchar(' ');
+
+				if (pro >= 100)
+				{
+					_putchar((pro / 100) + 48);
+					_putchar((pro / 10) % 10 + 48);
+				}
+				else if (pro <= 99 && pro >= 10)
+					_putchar((pro / 10) + 48);
+				_putchar((pro % 10) + 48);
+			}
+			_putchar('\n');
 		}
-		printf("\n");
 	}
 }
-
