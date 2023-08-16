@@ -10,14 +10,14 @@
 
 int main(void)
 {
-	int a = 1, b = 2, count = 0;
+	unsigned long a = 1, b = 2, count = 0;
 
 	printf("%d, %d, ", a, b);
 	count += 2;
 
 	while (count < 98)
 	{
-		int next = a + b;
+		unsigned long next = a + b;
 
 		if (count == 97)
 		{
