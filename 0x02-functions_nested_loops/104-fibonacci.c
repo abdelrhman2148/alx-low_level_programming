@@ -10,10 +10,12 @@
 
 int main(void)
 {
+	int i;
 	unsigned int a = 1, b = 2;
 
 	printf("%u, %u, ", a, b);
-	for (int i = 2; i < 98; i++)
+
+	for (i = 2; i < 98; i++)
 	{
 		unsigned int next = a + b;
 
