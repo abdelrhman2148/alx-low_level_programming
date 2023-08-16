@@ -10,27 +10,25 @@
 
 int main(void)
 {
-	unsigned long long a = 1, b = 2, count = 0;
+	int count = 0;
+	unsigned int a = 1, b = 2;
 
-	printf("%llu, %llu, ", a, b);
+	printf("%u, %u, ", a, b);
 	count += 2;
 
 	while (count < 98)
 	{
-		unsigned long long next = a + b;
-
-		if (count == 97)
-		{
-			printf("%llu\n", next);
-		}
-		else
-		{
-			printf("%llu, ", next);
-		}
+		a = a + b;
+		b = a - b;
 		count++;
 
-		a = b;
-		b = next;
+		printf("%u", a);
+
+		if (count < 98)
+		{
+			printf(", ");
+		}
 	}
+	printf("\n");
 	return (0);
 }
