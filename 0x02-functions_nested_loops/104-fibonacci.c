@@ -27,7 +27,7 @@ int main(void)
 		{
 			printf("%d, ", next);
 		}
-		count++
+		count++;
 
 		a = b;
 		b = next;
