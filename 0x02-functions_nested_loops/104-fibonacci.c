@@ -12,7 +12,7 @@ int main(void)
 {
 	unsigned long a = 1, b = 2, count = 0;
 
-	printf("%d, %d, ", a, b);
+	printf("%lu, %lu, ", a, b);
 	count += 2;
 
 	while (count < 98)
@@ -21,11 +21,11 @@ int main(void)
 
 		if (count == 97)
 		{
-			printf("%d\n", next);
+			printf("%lu\n", next);
 		}
 		else
 		{
-			printf("%d, ", next);
+			printf("%lu, ", next);
 		}
 		count++;
 
@@ -34,4 +34,3 @@ int main(void)
 	}
 	return (0);
 }
-
