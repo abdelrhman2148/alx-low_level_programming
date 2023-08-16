@@ -10,25 +10,24 @@
 
 int main(void)
 {
-	int count = 0;
 	unsigned int a = 1, b = 2;
 
 	printf("%u, %u, ", a, b);
-	count += 2;
-
-	while (count < 98)
+	for (int i = 2; i < 98; i++)
 	{
-		a = a + b;
-		b = a - b;
-		count++;
+		unsigned int next = a + b;
 
-		printf("%u", a);
+		printf("%u", next);
 
-		if (count < 98)
+		a = b;
+		b = next;
+
+		if (i < 97)
 		{
 			printf(", ");
 		}
 	}
+
 	printf("\n");
 	return (0);
 }
