@@ -10,14 +10,14 @@
 
 int main(void)
 {
-	unsigned long a = 1, b = 2, count = 0;
+	unsigned long long a = 1, b = 2, count = 0;
 
 	printf("%lu, %lu, ", a, b);
 	count += 2;
 
 	while (count < 98)
 	{
-		unsigned long next = a + b;
+		unsigned long long next = a + b;
 
 		if (count == 97)
 		{
