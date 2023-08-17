@@ -1,9 +1,6 @@
 #include <stdio.h>
 /**
  * main - Entry point
- *
- * @i: as integer to count
- *
  * Return: Always 0 (succes)
 */
 
