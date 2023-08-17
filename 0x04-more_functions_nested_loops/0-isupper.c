@@ -2,7 +2,7 @@
 /**
  * _isupper - This C program check if the variable is uppercase
  *
- * @c: this is the input 
+ * @c: this is the input
  *
  * Return: 1 if upper else 0
 */
