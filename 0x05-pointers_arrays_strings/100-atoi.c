@@ -11,21 +11,15 @@
 int _atoi(char *s)
 {
 	unsigned int result = 0;
-	unsigned int sign = 1;
-	int i = 0;
+	int sign = 1;
 
-	while (s[i] == ' ' || s[i] == '-' || s[i] == '+')
-	{
-		if (s[i] == '-')
-		{
-			sign = -sign;
-		}
-		i++;
-	}
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		result = result * 10 + (s[i] - '0');
-		i++;
-	}
+	do {
+		if (*s == '-')
+			sign *= -1;
+		else if (*s >= '0' && *s <= '9')
+			result = (result * 10) + (*s - '0');
+		else if (result > 0)
+			break;
+	} while (*s++);
 	return (result * sign);
 }
