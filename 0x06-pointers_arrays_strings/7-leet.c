@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "main.h"
 /**
  * *leet - this function replace specfic words with 43071
@@ -9,31 +10,23 @@
 
 char *leet(char *str)
 {
-	char *ptr = str;
+	char leetMap[256];
+	int i;
 
-	while (*ptr != '\0')
+	leetMap['a'] = leetMap['A'] = '4';
+	leetMap['e'] = leetMap['E'] = '3';
+	leetMap['o'] = leetMap['O'] = '0';
+	leetMap['t'] = leetMap['T'] = '7';
+	leetMap['l'] = leetMap['L'] = '1';
+
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (*ptr == 'a' || *ptr == 'A')
+		char replacement = leetMap[(unsigned char)str[i]];
+
+		if (replacement)
 		{
-			*ptr = '4';
+			str[i] = replacement;
 		}
-		else if (*ptr == 'e' || *ptr == 'E')
-		{
-			*ptr = '3';
-		}
-		else if (*ptr == 'o' || *ptr == 'O')
-		{
-			*ptr = '0';
-		}
-		else if (*ptr == 't' || *ptr == 'T')
-		{
-			*ptr = '7';
-		}
-		else if (*ptr == 'l' || *ptr == 'L')
-		{
-			*ptr = '1';
-		}
-		ptr++;
 	}
-	return (str);
+	return(str);
 }
