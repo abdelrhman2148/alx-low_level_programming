@@ -11,7 +11,7 @@
 char *leet(char *str)
 {
 	char leetMap[256];
-	int i;
+	unsigned int i;
 
 	leetMap['a'] = leetMap['A'] = '4';
 	leetMap['e'] = leetMap['E'] = '3';
@@ -28,5 +28,5 @@ char *leet(char *str)
 			str[i] = replacement;
 		}
 	}
-	return(str);
+	return (str);
 }
