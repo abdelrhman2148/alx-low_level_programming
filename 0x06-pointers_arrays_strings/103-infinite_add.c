@@ -1,7 +1,7 @@
 #include "main.h"
 #include <string.h>
 /**
- * infinite_add - This function adds two numbers.
+ * *infinite_add - This function adds two numbers.
  *
  * @n1: the first number as a string
  * @n2: the second number as a string
@@ -48,6 +48,6 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 			right--;
 		}
 	}
-	return r;
+	return (r);
 }
 
