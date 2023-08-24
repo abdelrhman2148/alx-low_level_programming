@@ -7,29 +7,17 @@
 */
 void print_number(int n)
 {
-	unsigned int divisor = 1;
-	unsigned int temp = n;
+	unsigned int var;
 
-	if (n == 0)
-	{
-		_putchar('0');
-		return;
-	}
+	var = n;
 	if (n < 0)
 	{
 		_putchar('-');
-		n = -n;
+		var  = -n;
 	}
-	while (temp / 10 != 0)
+	if (var / 10 != 0)
 	{
-		divisor *= 10;
-		temp /= 10;
+		print_number(var / 10);
 	}
-	while (divisor != 0)
-	{
-		_putchar((n / divisor) + '0');
-		n %= divisor;
-		divisor /= 10;
-	}
+	_putchar((var % 10) + '0');
 }
-
