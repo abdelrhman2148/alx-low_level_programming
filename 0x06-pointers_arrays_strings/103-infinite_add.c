@@ -13,41 +13,40 @@
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
 	int carry = 0;
-	int i = 0, j = 0, k = 0;
-	int left, right;
-	char temp;
+	int i = strlen(n1) - 1;
+	int j = strlen(n2) - 1;
+	int k = 0;
+	int num1, num2, sum, left, right;
 
-	while (n1[i] != '\0' || n2[j] != '\0')
+	while (i >= 0 || j >= 0)
 	{
-		int num1 = (i < (int)strlen(n1)) ? (n1[i] - '0') : 0;
-		int num2 = (j < (int)strlen(n2)) ? (n2[j] - '0') : 0;
-		int sum = num1 + num2 + carry;
-
-		left = 0;
-		right = k - 1;
-		temp = r[left];
+		num1 = (i >= 0) ? (n1[i] - '0') : 0;
+		num2 = (j >= 0) ? (n2[j] - '0') : 0;
+		sum = num1 + num2 + carry;
 		r[k++] = (sum % 10) + '0';
 		carry = sum / 10;
-		i++;
-		j++;
+		i--;
+		j--;
 		if (k == size_r - 1)
 		{
-			r[k] = '\0';
-			return (r);
+			return (0);
 		}
-		if (carry > 0)
-		{
-			r[k++] = carry + '0';
-		}
-		r[k] = '\0';
-		while (left < right)
-		{
-			r[left] = r[right];
-			r[right] = temp;
-			left++;
-			right--;
-		}
+	}
+	if (carry > 0)
+	{
+		r[k++] = carry + '0';
+	}
+	r[k] = '\0';
+	left = 0;
+	right = k - 1;
+	while (left < right)
+	{
+		char temp = r[left];
+
+		r[left] = r[right];
+		r[right] = temp;
+		left++;
+		right--;
 	}
 	return (r);
 }
-
