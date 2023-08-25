@@ -1,5 +1,4 @@
 #include "main.h"
-#include <ctype.h>
 /**
  * print_buffer - this function can print buffer
  *
