@@ -10,13 +10,5 @@
 
 void set_string(char **s, char *to)
 {
-	if (s == NULL || to == NULL)
-	{
-		return;
-	}
-	*s = malloc(strlen(to) + 1);
-	if (*s != NULL)
-	{
-		strcpy(*s, to);
-	}
+	*s = to;
 }
