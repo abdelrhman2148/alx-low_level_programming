@@ -3,31 +3,23 @@
  * _sqrt_help - this recursive helper function find the natural square root
  *
  * @n: the input int
- * @start: the start range to search in
- * @end: the end of the range
+ * @mid: value to return
  *
  * Return: -1 or mid or _sqrt_helper
 */
-int _sqrt_help(int n, int start, int end)
+int _sqrt_help(int n, int mid)
 {
-	int mid = start + (end - start) / 2;
-	int square = mid * mid;
-
-	if (start > end)
-	{
-		return (end);
-	}
-	if (square == n)
+	if (mid * mid == n)
 	{
 		return (mid);
 	}
-	else if (square > n)
+	else if (mid * mid < n)
 	{
-		return (_sqrt_help(n, start, mid - 1));
+		return (_sqrt_help(n, mid + 1));
 	}
 	else
 	{
-		return (_sqrt_help(n, mid + 1, end));
+		return (-1);
 	}
 }
 /**
@@ -35,13 +27,9 @@ int _sqrt_help(int n, int start, int end)
  *
  * @n: the input integer
  *
- * Return: -1 or _sqrt_helper
+ * Return: _sqrt_helper
 */
 int _sqrt_recursion(int n)
 {
-	if (n < 0)
-	{
-		return (-1);
-	}
-	return (_sqrt_help(n, 0, n));
+	return (_sqrt_help(n, 1));
 }
