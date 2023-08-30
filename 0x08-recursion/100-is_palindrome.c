@@ -2,7 +2,7 @@
 #include "string.h"
 /**
  * is_palindrome_recursive - this function uses a recursive approach
- *                          to check whether the characters at symmetric positions are the same.
+ *        to check whether the characters at symmetric positions are the same.
  *
  * @s: the string to check
  * @left: first int
@@ -32,5 +32,6 @@ int is_palindrome_recursive(char *s, int left, int right)
 int is_palindrome(char *s)
 {
 	int length = strlen(s);
+
 	return (is_palindrome_recursive(s, 0, length - 1));
 }
