@@ -3,7 +3,7 @@
  * main - Entry point to this function that print the arg it takes
  *
  * @argc: int count
- * @argc: char vector
+ * @argv: char vector
  *
  * Return: 0
 */
