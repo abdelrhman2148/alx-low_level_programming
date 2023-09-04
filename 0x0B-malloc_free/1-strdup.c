@@ -12,19 +12,20 @@
 */
 char *_strdup(char *str)
 {
-	size_t length = strlen(str);
-	char *duplicate = (char *)malloc((length + 1) * sizeof(char));
-
 	if (str == NULL)
 	{
-		printf("failed to allocate memory\n");
 		return (NULL);
 	}
-	if (duplicate == NULL)
+	else
 	{
-		printf("failed to allocate memory\n");
-		return (NULL);
+		size_t length = strlen(str);
+		char *duplicate = (char *)malloc((length + 1) * sizeof(char));
+		
+		if (duplicate == NULL)
+		{
+			return (NULL);
+		}
+		strcpy(duplicate, str);
+		return (duplicate);
 	}
-	strcpy(duplicate, str);
-	return (duplicate);
 }
