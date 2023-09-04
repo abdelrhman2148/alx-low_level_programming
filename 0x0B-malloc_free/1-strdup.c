@@ -21,6 +21,7 @@ char *_strdup(char *str)
 	}
 	if (duplicate == NULL)
 	{
+		printf("failed to allocate memory\n");
 		return (NULL);
 	}
 	strcpy(duplicate, str);
