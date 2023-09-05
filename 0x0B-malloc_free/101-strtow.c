@@ -13,20 +13,21 @@ char **strtow(char *str)
 {
 	char **words = NULL;
 	int word_count = 0;
-	int i, j, len = strlen(str);
-	int word_start = 0, word_length = 0, word_index = 0;
+	int i, j, len = strlen(str), word_start, word_length, word_index;
 
-	if (str == NULL || *str == '\0')
-                return (NULL);
+	if (str == NULL || *str == '\0' || (str[0] == ' ' && str[1] == '\0'))
+		return (NULL);
 	for (i = 0; i < len; i++)
 	{
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
 			word_count++;
 	}
+	if (word_count == 0)
+		return (NULL);
 	words = (char **)malloc((word_count + 1) * sizeof(char *));
 	if (words == NULL)
 		return (NULL);
-
+	word_start = word_length = word_index = 0;
 	for (i = 0; i <= len; i++)
 	{
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
