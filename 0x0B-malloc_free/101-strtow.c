@@ -7,91 +7,47 @@
  *
  * @str: The input string.
  *
- * Return: A pointer to an array of strings (words) or NULL if str is NULL or empty.
+ * Return: A pointer to an array of strings or NULL if str is NULL or empty.
 */
 char **strtow(char *str)
 {
-	int i, j, word_count = 0, index = 0;
-	bool in_word = false;
-	char *ptr = str;
-	char **words;
-	char *token;
+	char **words = NULL;
+	int word_count = 0;
+	int i, j, len = strlen(str);
+	int word_start = 0, word_length = 0, word_index = 0;
 
 	if (str == NULL || *str == '\0')
+                return (NULL);
+	for (i = 0; i < len; i++)
 	{
-		return (NULL);
+		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
+			word_count++;
 	}
-	while (*ptr != '\0')
-	{
-		if (*ptr == ' ')
-		{
-			if (in_word)
-			{
-				in_word = false;
-				word_count++;
-			}
-		}
-		else
-		{
-			in_word = true;
-		}
-		ptr++;
-	}
-	words = (char **)malloc(sizeof(char *) * (word_count + 1));
+	words = (char **)malloc((word_count + 1) * sizeof(char *));
 	if (words == NULL)
+		return (NULL);
+
+	for (i = 0; i <= len; i++)
 	{
-		return NULL;
-	}
-	in_word = false;
-	ptr = str;
-	token = (char *)malloc(sizeof(char) * (strlen(str) + 1));
-	while (*ptr != '\0')
-	{
-		if (*ptr == ' ')
+		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
 		{
-			if (in_word)
+			word_start = i;
+			word_length = 0;
+			for (j = i; str[j] != ' ' && str[j] != '\0'; j++)
+				word_length++;
+			words[word_index] = (char *)malloc((word_length + 1) * sizeof(char));
+			if (words[word_index] == NULL)
 			{
-				in_word = false;
-				token[index] = '\0';
-				words[index] = strdup(token);
-				if (words[index] == NULL)
-				{
-					for (i = 0; i < index; i++)
-					{
-						free(words[i]);
-					}
-					free(words);
-					free(token);
-					return (NULL);
-				}
-				index++;
+				for (j = 0; j < word_index; j++)
+					free(words[j]);
+				free(words);
+				return (NULL);
 			}
+			strncpy(words[word_index], &str[word_start], word_length);
+			words[word_index][word_length] = '\0';
+			word_index++;
 		}
-		else
-		{
-			in_word = true;
-			token[index] = *ptr;
-			index++;
-		}
-		ptr++;
 	}
-	if (in_word)
-	{
-		token[index] = '\0';
-		words[index] = strdup(token);
-		if (words[index] == NULL)
-		{
-			for (j = 0; j <= index; j++)
-			{
-				free(words[j]);
-			}
-			free(words);
-			free(token);
-			return (NULL);
-		}
-		index++;
-	}
-	words[index] = NULL;
-	free(token);
+	words[word_count] = NULL;
 	return (words);
 }
