@@ -6,7 +6,7 @@
  *
  * @str: this is the string will check
  *
- * Return 0 or 1
+ * Return: 0 or 1
 */
 int isNumeric(const char *str)
 {
@@ -31,7 +31,7 @@ long multiply(int num1, int num2)
 	return ((long)num1 * num2);
 }
 /**
- * maun - Entry point
+ * main - Entry point
  *
  * @argc: int
  * @argv: pointer to char
