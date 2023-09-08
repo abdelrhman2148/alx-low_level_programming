@@ -1,57 +1,51 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-/**
- * isDigitString - Checks if a string contains only digits.
- *
- * @str: The string to be checked.
- *
- * Return: 1 if all characters are digits, 0 otherwise.
-*/
-int isDigitString(char *str)
-{
-	int i;
 
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		if (!isdigit(str[i]))
-		{
-			return (0);
-		}
-	}
-	return (1);
+#define ERROR_MSG "Error"
+
+/**
+ * handle_error - handles errors for the main function
+*/
+void handle_error(void)
+{
+	printf("%s\n", ERROR_MSG);
+	exit(98);
 }
 /**
- * main - Entry point of the program.
+ * main - multiplies two positive numbers
  *
- * @argc: The number of command-line arguments.
- * @argv: An array containing the command-line arguments.
+ * @argc: number of arguments
+ * @argv: array of arguments
  *
- * Return: 0 on success, 98 on error.
+ * Return: always 0 (Success)
 */
 int main(int argc, char *argv[])
 {
-	int num1, num2, result;
+	char *num1, *num2;
+	int len1, len2, i;
 
 	if (argc != 3)
-	{
-		printf("Error\n");
-		return (98);
-	}
-	if (!isDigitString(argv[1]) || !isDigitString(argv[2]))
-	{
-		printf("Error\n");
-		return (98);
-	}
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[2]);
+		handle_error();
+	num1 = argv[1];
+	num2 = argv[2];
 
-	if (num1 < 0 || num2 < 0)
+	for (i = 0; num1[i]; i++)
 	{
-		printf("Error\n");
-		return (98);
+		if (num1[i] < '0' || num1[i] > '9')
+			handle_error();
 	}
-	result = num1 * num2;
-	printf("%d\n", result);
+	for (i = 0; num2[i]; i++)
+	{
+		if (num2[i] < '0' || num2[i] > '9')
+			handle_error();
+	}
+	len1 = atoi(num1);
+	len2 = atoi(num2);
+
+	if (len1 == 0 || len2 == 0)
+		printf("0\n");
+	else
+		printf("%d\n", len1 * len2);
 	return (0);
 }
