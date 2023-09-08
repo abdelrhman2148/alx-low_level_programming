@@ -1,102 +1,94 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 /**
- * is_digit - checks if a string contains a non-digit char
- * @str: string to be evaluated
+ * isZero - checks if a number is zero.
+ * @str: input string.
  *
- * Return: 0 if a non-digit is found, 1 otherwise
+ * Return: 1 if the number is zero, 0 otherwise.
 */
-int is_digit(const char *str)
+int isZero(const char *str)
 {
 	while (*str)
 	{
-		if (*str < '0' || *str > '9')
+		if (*str != '0')
 			return (0);
-		str++;
 	}
+	str++;
 	return (1);
 }
 /**
- * multiply_strings - multiplies two positive numbers represented as strings
+ * multiply - multiplies two positive numbers.
  *
- * @num1_str: first number as string
- * @num2_str: second number as string
+ * @num1: first number as a string.
+ * @num2: second number as a string.
  *
- * Return: the result of the multiplication as a string
+ * Return: result as a string.
 */
-char *multiply_strings(const char *num1_str, const char *num2_str)
+char *multiply(const char *num1, const char *num2)
 {
-	int result_len, *result, len1 = 0, len2 = 0, i, j, digit1;
-	int carry = 0, digit2, product, index = 0;
-	char *result_str;
+	int i, j, carry, pro, len1, start, len2, lenOut;
+	char *result, *finalResult;
 
-	if (!is_digit(num1_str) || !is_digit(num2_str))
-		return (NULL);
-	while (num1_str[len1])
-		len1++;
-	while (num2_str[len2])
-		len2++;
-	result_len = len1 + len2;
-	result = calloc(result_len, sizeof(int));
-	if (!result)
-		return (NULL);
+	if (isZero(num1) || isZero(num2))
+		return ("0");
+	len1 = strlen(num1);
+	len2 = strlen(num2);
+	lenOut = len1 + len2;
+	result = (char *)malloc(lenOut + 1);
+
+	if (result == NULL)
+	{
+		perror("Memory allocation error");
+		exit(1);
+	}
+	for (i = 0; i < lenOut; i++)
+	{
+		result[i] = '0';
+	}
+	result[lenOut] = '\0';
 	for (i = len1 - 1; i >= 0; i--)
 	{
-		digit1 = num1_str[i] - '0';
+		carry = 0;
 		for (j = len2 - 1; j >= 0; j--)
 		{
-			digit2 = num2_str[j] - '0';
-			product = digit1 * digit2 + result[i + j + 1] + carry;
-			result[i + j + 1] = product % 10;
-			carry = product / 10;
+			pro = (num1[i] - '0') * (num2[j] - '0') + (result[i + j + 1] - '0') + carry;
+			carry = pro / 10;
+			result[i + j + 1] = (pro % 10) + '0';
 		}
-		result[i + j + 1] += carry;
+		result[i] += carry;
 	}
-	result_str = malloc(result_len + 1);
-	if (!result_str)
-		free(result);
-	return (NULL);
-	for (i = 0; i < result_len; i++)
+	start = 0;
+	while (result[start] == '0')
 	{
-		if (result[i] != 0 || index > 0)
-		{
-			result_str[index++] = result[i] + '0';
-		}
+		start++;
 	}
-	result_str[index] = '\0';
+	finalResult = strdup(result + start);
 	free(result);
-	return (result_str);
+	return (finalResult);
 }
 /**
- * main - Entry point
+ * main - Entry point program that multiplies two positive numbers.
  *
- * @argc: int count
- * @argv: char vector
+ * @argc: number of arguments.
+ * @argv: arguments vector.
  *
- * Return: 98 or 0
+ * Return: 0 - success.
 */
 int main(int argc, char *argv[])
 {
-	const char *num1_str, *num2_str;
-	char *result_str;
+	char *num1, *num2, *result;
 
 	if (argc != 3)
 	{
-		printf("Error\n");
-		return (98);
+		fprintf(stderr, "Usage: %s <num1> <num2>\n", argv[0]);
+		return (1);
 	}
-	num1_str = argv[1];
-	num2_str = argv[2];
-	result_str = multiply_strings(num1_str, num2_str);
-	if (result_str)
-	{
-		printf("%s\n", result_str);
-		free(result_str);
-		return (0);
-	}
-	else
-	{
-		printf("Error\n");
-		return (98);
-	}
+	num1 = argv[1];
+	num2 = argv[2];
+	result = multiply(num1, num2);
+	printf("%s\n", result);
+	free(result);
+	return (0);
 }
