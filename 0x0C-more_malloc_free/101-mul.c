@@ -1,94 +1,110 @@
 #include "main.h"
-#include <stdlib.h>
-#include <ctype.h>
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 /**
- * isZero - checks if a number is zero.
- * @str: input string.
+ * is_digit - checks if character is a digit
+ * @ch: the character to check
  *
- * Return: 1 if the number is zero, 0 otherwise.
+ * Return: 1 if it's a digit, 0 otherwise
 */
-int isZero(const char *str)
+int is_digit(int ch)
 {
-	while (*str)
-	{
-		if (*str != '0')
-			return (0);
-	}
-	str++;
-	return (1);
+	return (ch >= '0' && ch <= '9');
 }
 /**
- * multiply - multiplies two positive numbers.
+ * string_length - returns the length of a string
  *
- * @num1: first number as a string.
- * @num2: second number as a string.
+ * @str: the string whose length to check
  *
- * Return: result as a string.
+ * Return: integer length of the string
 */
-char *multiply(const char *num1, const char *num2)
+int string_length(char *str)
 {
-	int i, j, carry, pro, len1, start, len2, lenOut;
-	char *result, *finalResult;
+	int length = 0;
 
-	if (isZero(num1) || isZero(num2))
-		return ("0");
-	len1 = strlen(num1);
-	len2 = strlen(num2);
-	lenOut = len1 + len2;
-	result = (char *)malloc(lenOut + 1);
+	while (*str++)
+		length++;
+	return (length);
+}
+/**
+ * big_multiply - multiply two big number strings
+ *
+ * @num1: the first big number string
+ * @num2: the second big number string
+ *
+ * Return: the product big number string
+*/
+char *big_multiply(char *num1, char *num2)
+{
+	char *result;
+	int len1, len2, i, j, k, carry, product;
 
-	if (result == NULL)
+	len1 = string_length(num1);
+	len2 = string_length(num2);
+	result = malloc(len1 + len2 + 1);
+	if (!result)
 	{
-		perror("Memory allocation error");
-		exit(1);
+		printf("Error\n");
+		exit(98);
 	}
-	for (i = 0; i < lenOut; i++)
-	{
+	for (i = 0; i < len1 + len2; i++)
 		result[i] = '0';
-	}
-	result[lenOut] = '\0';
 	for (i = len1 - 1; i >= 0; i--)
 	{
-		carry = 0;
-		for (j = len2 - 1; j >= 0; j--)
+		if (!is_digit(num1[i]))
 		{
-			pro = (num1[i] - '0') * (num2[j] - '0') + (result[i + j + 1] - '0') + carry;
-			carry = pro / 10;
-			result[i + j + 1] = (pro % 10) + '0';
+			free(result);
+			printf("Error\n");
+			exit(98);
 		}
-		result[i] += carry;
+		carry = 0;
+		for (j = len2 - 1, k = i + len2; j >= 0; j--, k--)
+		{
+			if (!is_digit(num2[j]))
+			{
+				free(result);
+				printf("Error\n");
+				exit(98);
+			}
+			product = (num1[i] - '0') * (num2[j] - '0') + (result[k] - '0') + carry;
+			carry = product / 10;
+			result[k] = (product % 10) + '0';
+		}
+		if (carry)
+			result[k] += carry;
 	}
-	start = 0;
-	while (result[start] == '0')
-	{
-		start++;
-	}
-	finalResult = strdup(result + start);
-	free(result);
-	return (finalResult);
+	return (result);
 }
 /**
- * main - Entry point program that multiplies two positive numbers.
+ * main - multiply two big number strings
  *
- * @argc: number of arguments.
- * @argv: arguments vector.
+ * @argc: the number of arguments
+ * @argv: the argument vector
  *
- * Return: 0 - success.
+ * Return: Always 0 on success.
 */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	char *num1, *num2, *result;
+	char *result;
+	int i, hasNonZero = 0;
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s <num1> <num2>\n", argv[0]);
-		return (1);
+		printf("Error\n");
+		exit(98);
 	}
-	num1 = argv[1];
-	num2 = argv[2];
-	result = multiply(num1, num2);
-	printf("%s\n", result);
+	result = big_multiply(argv[1], argv[2]);
+	for (i = 0; result[i] != '\0'; i++)
+	{
+		if (result[i] != '0')
+			hasNonZero = 1;
+		if (hasNonZero)
+			_putchar(result[i]);
+	}
+	if (!hasNonZero)
+		_putchar('0');
+	_putchar('\n');
 	free(result);
 	return (0);
 }
