@@ -1,6 +1,7 @@
 #include "dog.h"
 /**
  * new_dog - this function creates a new dog.
+ *
  * @name: The name of the dog.
  * @age: The age of the dog.
  * @owner: The owner of the dog.
@@ -9,26 +10,24 @@
 */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	char *name_copy, *owner_copy;
-	dog_t *new_dog_ptr;
+	dog_t *dog;
+	int len1 = strlen(name);
+	int len2 = strlen(owner);
 
-	new_dog_ptr = malloc(sizeof(dog_t));
-	if (new_dog_ptr == NULL)
+	dog = malloc(sizeof(dog_t));
+	if (dog == NULL)
+		return (NULL);
+	dog->name = malloc(len1 + 1);
+	dog->owner = malloc(len2 + 1);
+	if (dog->name == NULL || dog->owner == NULL)
 	{
+		free(dog->name);
+		free(dog->owner);
+		free(dog);
 		return (NULL);
 	}
-	name_copy = strdup(name);
-	owner_copy = strdup(owner);
-
-	if (name_copy == NULL || owner_copy == NULL)
-	{
-		free(name_copy);
-		free(owner_copy);
-		free(new_dog_ptr);
-		return (NULL);
-	}
-	new_dog_ptr->name = name_copy;
-	new_dog_ptr->age = age;
-	new_dog_ptr->owner = owner_copy;
-	return (new_dog_ptr);
+	strcpy(dog->name, name);
+	strcpy(dog->owner, owner);
+	dog->age = age;
+	return (dog);
 }
