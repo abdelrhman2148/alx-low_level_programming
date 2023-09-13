@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * print_opcodes - this function responsible for print the opcodes of a func
+ * print_opcodes - this function responsible for print the opcodes of a func.
  *
- * @start: pointer to the starting address of the opcodes
  * @num_bytes: The number of bytes to print
 */
 void print_opcodes(int num_bytes)
@@ -30,6 +29,8 @@ void print_opcodes(int num_bytes)
  *
  * @argc: count
  * @argv: vector
+ *
+ * Return: 0 or 1 or 2.
 */
 int main(int argc, char *argv[])
 {
