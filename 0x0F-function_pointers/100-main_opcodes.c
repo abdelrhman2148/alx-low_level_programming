@@ -10,25 +10,33 @@
 */
 int main(int argc, char *argv[])
 {
-	int i, num_bytes;
-	unsigned char *main_ptr;
+	int numBytes, i;
+	char *opcodeArray;
 
 	if (argc != 2)
 	{
 		printf("Error\n");
-		exit(1);
+		return (1);
 	}
-	num_bytes = atoi(argv[1]);
-	if (num_bytes < 0)
+
+	numBytes = atoi(argv[1]);
+
+	if (numBytes < 0)
 	{
 		printf("Error\n");
-		exit(2);
+		return (2);
 	}
-	main_ptr = (unsigned char *)main;
-	for (i = 0; i < num_bytes; i++)
+
+	opcodeArray = (char *)main;
+
+	for (i = 0; i < numBytes; i++)
 	{
-		printf("%02hhx ", ((unsigned char *)main_ptr)[i]);
+		if (i == numBytes - 1)
+		{
+			printf("%02hhx\n", opcodeArray[i]);
+			break;
+		}
+		printf("%02hhx ", opcodeArray[i]);
 	}
-	printf("\n");
 	return (0);
 }
