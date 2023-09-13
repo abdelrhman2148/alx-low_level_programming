@@ -1,30 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "function_pointers.h"
-/**
- * print_opcodes - this function responsible for print the opcodes of a func.
- *
- * @num_bytes: The number of bytes to print
-*/
-void print_opcodes(int num_bytes)
-{
-	void *addr;
-	unsigned char *ptr;
-	int i;
-
-	if (num_bytes < 0)
-	{
-		printf("Error\n");
-		exit(2);
-	}
-	addr = (void *)&print_opcodes;
-	ptr = (unsigned char *)addr;
-	for (i = 0; i < num_bytes; i++)
-	{
-		printf("%02x ", ptr[i]);
-	}
-	printf("\n");
-}
 /**
  * main - Entry point
  *
@@ -35,7 +10,8 @@ void print_opcodes(int num_bytes)
 */
 int main(int argc, char *argv[])
 {
-	int num_bytes;
+	int i, num_bytes;
+	unsigned char *main_ptr;
 
 	if (argc != 2)
 	{
@@ -43,6 +19,16 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	num_bytes = atoi(argv[1]);
-	print_opcodes(num_bytes);
+	if (num_bytes < 0)
+	{
+		printf("Error\n");
+		return (2);
+	}
+	main_ptr = (unsigned char *)main;
+	for (i = 0; i < num_bytes; i++)
+	{
+		printf("%02x ", ((unsigned char *)main_ptr)[i]);
+	}
+	printf("\n");
 	return (0);
 }
