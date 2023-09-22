@@ -7,9 +7,9 @@ section .text
     extern printf
 
 main:
-    sub rsp, 8
+    push rbp
     mov rdi, format
     mov rsi, hello
     call printf
-    add rsp, 8
+    pop rbp
     ret
