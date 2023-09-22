@@ -1,19 +1,15 @@
 section .data
-    hello db "Hello, Holberton",0
+    hello db "Hello, Holberton",10,0
+    format db "%s",0
 
 section .text
     global main
-
     extern printf
 
 main:
-    push rbp
-    mov rdi, hello
+    sub rsp, 8
+    mov rdi, format
+    mov rsi, hello
     call printf
-    add rsp, 8  ; Clean up the stack
-    pop rbp
-
-    ; Exit the program
-    mov rax, 60         ; syscall: exit
-    xor rdi, rdi        ; status: 0
-    syscall
+    add rsp, 8
+    ret
